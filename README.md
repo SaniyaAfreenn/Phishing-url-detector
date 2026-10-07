@@ -1,6 +1,7 @@
 # Phishing-url-detector
+
 Machine Learning based web application to detect and classify phishing URLs. Built for REVA University Abhinava Hackathon.
-# Phishing URL Detector
+
 # Phishing URL Detector
 
 A Machine Learning based web application to detect and classify phishing URLs. Built for the REVA University Abhinava Hackathon.
@@ -30,4 +31,3 @@ As Member C, I contributed to the project through:
 ### Contribution Summary
 
 My contribution focused on **frontend development, documentation, testing, and project integration** as a Member C of the team.
-
