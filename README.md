@@ -1,9 +1,7 @@
-# Phishing-url-detector
-Machine Learning based web application to detect and classify phishing URLs. Built for REVA University Abhinava Hackathon.
-
 # Phishing URL Detection using Machine Learning
 
 Machine Learning based web application to detect and classify phishing URLs. Built for REVA University Abhinava Hackathon.
+
 
 ## 1. Problem Statement
 

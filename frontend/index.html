@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phishing URL Detector</title>
+  <meta name="description" content="AI & Machine Learning powered URL threat analyzer to instantly detect phishing and malicious links.">
+  
+  <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="background-decorations" aria-hidden="true">
+    <div class="circle circle-1"></div>
+    <div class="circle circle-2"></div>
+  </div>
+
+  <main class="app-container">
+    <!-- Header Section -->
+    <header class="app-header">
+      <div class="badge">
+        <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <path d="m9 12 2 2 4-4"/>
+        </svg>
+        <span>AI Security Engine</span>
+      </div>
+      <h1 class="app-title">Phishing URL Detector</h1>
+      <p class="app-description">
+        Scan and analyze web addresses in real-time to protect against fraudulent phishing attacks, deceptive domains, and malicious threats.
+      </p>
+    </header>
+
+    <!-- Main Card Container -->
+    <section class="card analyzer-card">
+      <form id="url-form" class="url-form" novalidate>
+        <div class="input-group">
+          <label for="url-input" class="sr-only">Enter Website URL</label>
+          <div class="input-wrapper">
+            <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+            </svg>
+            <input 
+              type="url" 
+              id="url-input" 
+              name="url" 
+              placeholder="Enter or paste URL (e.g. https://example.com)..." 
+              autocomplete="off"
+              spellcheck="false"
+              required
+            >
+            <button type="button" id="clear-btn" class="clear-btn hidden" aria-label="Clear input">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+          <button type="submit" id="analyze-btn" class="primary-btn">
+            <span class="btn-text">Analyze URL</span>
+            <span class="btn-spinner hidden" aria-hidden="true"></span>
+          </button>
+        </div>
+        
+        <!-- Validation Error Message -->
+        <p id="input-error" class="input-error-msg hidden" role="alert"></p>
+
+        <!-- Quick Demo URLs -->
+        <div class="quick-examples">
+          <span class="examples-label">Try example:</span>
+          <button type="button" class="example-chip" data-url="https://www.google.com">Safe: Google</button>
+          <button type="button" class="example-chip" data-url="http://192.168.1.1/login-account-update?ref=admin@security">Phishing: Suspicious IP</button>
+        </div>
+      </form>
+
+      <!-- Error / Alert Banner -->
+      <div id="error-card" class="error-banner hidden" role="alert">
+        <svg class="error-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="8" x2="12" y2="12"/>
+          <line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+        <div class="error-content">
+          <strong id="error-title">Connection Error</strong>
+          <span id="error-message">Unable to reach the backend analysis service.</span>
+        </div>
+      </div>
+
+      <!-- Result Card -->
+      <div id="result-card" class="result-card hidden" aria-live="polite">
+        <div class="result-header">
+          <div class="result-badge-container">
+            <div id="result-icon-wrapper" class="result-icon">
+              <!-- Dynamically populated icon -->
+            </div>
+            <div>
+              <span class="result-label">Prediction Status</span>
+              <h2 id="prediction-text" class="prediction-text">Safe</h2>
+            </div>
+          </div>
+          <div class="confidence-container">
+            <span class="confidence-label">Confidence Score</span>
+            <span id="confidence-score" class="confidence-value">98.5%</span>
+          </div>
+        </div>
+
+        <div class="confidence-bar-wrapper">
+          <div class="confidence-bar-bg">
+            <div id="confidence-bar-fill" class="confidence-bar-fill" style="width: 0%;"></div>
+          </div>
+        </div>
+
+        <div class="scanned-url-box">
+          <span class="scanned-url-label">Analyzed URL:</span>
+          <code id="scanned-url" class="scanned-url-text">https://example.com</code>
+        </div>
+
+        <!-- Extracted Features Summary -->
+        <div id="features-breakdown" class="features-breakdown">
+          <h3 class="features-title">Extracted ML Features</h3>
+          <div class="features-grid">
+            <div class="feature-item">
+              <span class="feature-name">URL Length</span>
+              <span id="feat-length" class="feature-val">-</span>
+            </div>
+            <div class="feature-item">
+              <span class="feature-name">IP Address Flag</span>
+              <span id="feat-ip" class="feature-val">-</span>
+            </div>
+            <div class="feature-item">
+              <span class="feature-name">Hyphens (-)</span>
+              <span id="feat-hyphens" class="feature-val">-</span>
+            </div>
+            <div class="feature-item">
+              <span class="feature-name">At Symbols (@)</span>
+              <span id="feat-at" class="feature-val">-</span>
+            </div>
+            <div class="feature-item">
+              <span class="feature-name">Question Marks (?)</span>
+              <span id="feat-qm" class="feature-val">-</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p>Powered by Random Forest Machine Learning &bull; Hackathon Edition</p>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
