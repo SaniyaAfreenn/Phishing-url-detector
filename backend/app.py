@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 # Resolve paths
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 FRONTEND_DIR = os.path.abspath(os.path.join(BASE_DIR, "..", "frontend"))
-MODEL_PATH = os.path.abspath(os.path.join(BASE_DIR, "..", "ml_core", "phishing_model.joblib"))
+MODEL_PATH = os.path.abspath(os.path.join(BASE_DIR, "phishing_model.joblib"))
 
 # Initialize Flask App with frontend static folder
 app = Flask(__name__, static_folder=FRONTEND_DIR, static_url_path='')
