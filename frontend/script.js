@@ -3,8 +3,8 @@
  */
 
 // Configuration - Primary endpoint as specified in requirements
-const API_PRIMARY_URL = 'http://localhost:5001/predict';
-const API_FALLBACK_URL = 'http://localhost:5000/predict';
+const API_PRIMARY_URL = 'https://phishing-url-detector-zuoo.vercel.app/predict';
+const API_FALLBACK_URL = 'https://phishing-url-detector-zuoo.vercel.app/predict';
 
 // DOM Elements
 const urlForm = document.getElementById('url-form');
@@ -129,11 +129,11 @@ async function analyzeUrl(urlToAnalyze) {
 function renderResult(result, url) {
   const isPhishing = Boolean(result.is_phishing || String(result.prediction).toLowerCase() === 'phishing');
   const prediction = isPhishing ? 'Phishing' : 'Safe';
-  
+
   // Format confidence score as percentage
   let confidencePct = 'N/A';
   let confidenceNumeric = 0;
-  
+
   if (typeof result.confidence === 'number') {
     confidenceNumeric = Math.min(Math.max(result.confidence * 100, 0), 100);
     confidencePct = `${confidenceNumeric.toFixed(1)}%`;
