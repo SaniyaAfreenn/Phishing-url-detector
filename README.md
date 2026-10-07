@@ -2,6 +2,7 @@
 
 Machine Learning based web application to detect and classify phishing URLs. Built for REVA University Abhinava Hackathon.
 
+
 ## 1. Problem Statement
 
 Phishing URLs are malicious or deceptive web addresses designed to trick users into visiting fraudulent websites and potentially revealing sensitive information. The project aims to identify whether a given URL is legitimate or phishing using Machine Learning.
