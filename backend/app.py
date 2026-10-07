@@ -3,7 +3,7 @@ import sys
 import logging
 import joblib
 import pandas as pd
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 
 # Configure logging
@@ -13,15 +13,16 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Initialize Flask App
-app = Flask(__name__)
+# Resolve paths
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+FRONTEND_DIR = os.path.abspath(os.path.join(BASE_DIR, "..", "frontend"))
+MODEL_PATH = os.path.abspath(os.path.join(BASE_DIR, "..", "ml_core", "phishing_model.joblib"))
+
+# Initialize Flask App with frontend static folder
+app = Flask(__name__, static_folder=FRONTEND_DIR, static_url_path='')
 
 # Enable CORS for all routes to allow frontend communication
 CORS(app)
-
-# Resolve path to the pre-trained model in ml_core directory
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-MODEL_PATH = os.path.abspath(os.path.join(BASE_DIR, "..", "ml_core", "phishing_model.joblib"))
 
 # Load the machine learning model
 model = None
@@ -71,7 +72,24 @@ def extract_features(url: str) -> dict:
 
 @app.route('/', methods=['GET'])
 def index():
-    """Root route providing API status and model information."""
+    """Serves the frontend application index.html."""
+    if os.path.exists(os.path.join(FRONTEND_DIR, 'index.html')):
+        return send_from_directory(FRONTEND_DIR, 'index.html')
+    return jsonify({
+        'name': 'Phishing URL Detector API',
+        'status': 'running',
+        'model_loaded': model is not None,
+        'endpoints': {
+            '/predict': 'POST - Accepts JSON {"url": "https://example.com"} to predict Phishing or Safe',
+            '/health': 'GET - Health check endpoint'
+        }
+    }), 200
+
+
+@app.route('/api', methods=['GET'])
+@app.route('/status', methods=['GET'])
+def api_status():
+    """API status endpoint."""
     return jsonify({
         'name': 'Phishing URL Detector API',
         'status': 'running',
@@ -193,5 +211,6 @@ def predict():
 
 
 if __name__ == '__main__':
-    # Run the server on port 5000
-    app.run(host='0.0.0.0', port=5001, debug=True)
+    # Use port 5001 by default (port 5000 is used by AirPlay Receiver on macOS)
+    port = int(os.environ.get('PORT', 5001))
+    app.run(host='0.0.0.0', port=port, debug=True)
