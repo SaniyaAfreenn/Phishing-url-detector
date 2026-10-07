@@ -31,4 +31,3 @@ As Member C, I contributed to the project through:
 
 My contribution focused on **frontend development, documentation, testing, and project integration** as a Member C of the team.
 
-
