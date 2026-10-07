@@ -1,20 +1,18 @@
 # Phishing URL Detection using Machine Learning
 
-Machine Learning based web application to detect and classify phishing URLs. Built for REVA University Abhinava Hackathon.
-
+A Machine Learning based web application that detects and classifies URLs as legitimate or phishing. Built for the REVA University Abhinava Hackathon.
 
 ## 1. Problem Statement
 
-Phishing URLs are malicious or deceptive web addresses designed to trick users into visiting fraudulent websites and potentially revealing sensitive information. The project aims to identify whether a given URL is legitimate or phishing using Machine Learning.
+Phishing URLs are malicious or deceptive web addresses designed to trick users into visiting fraudulent websites and sharing sensitive information. This project aims to identify whether a URL is legitimate or phishing using Machine Learning.
 
 ## 2. Proposed Solution
 
-The system uses labelled URL data and URL-based features to train machine learning classification models. The trained model analyzes the characteristics of a URL and predicts whether it is legitimate or phishing.
+The system uses labelled URL data and URL-based features to train classification models. The trained model analyzes URL characteristics and predicts whether a URL is legitimate or phishing.
 
 ## 3. Dataset
 
-**Dataset:** A Dataset for Detecting Phishing URLs!
-
+**Dataset:** A Dataset for Detecting Phishing URLs  
 **Source:** Kaggle
 
 The dataset contains:
@@ -24,38 +22,33 @@ The dataset contains:
 
 The training dataset contains **7,658 records** and **87 URL-based features**.
 
-The target column is `status`, with two classes:
+**Target column:** `status`
 
 - `legitimate`
 - `phishing`
 
-### Dataset Distribution
-
-| Category | Number of Records |
+| Category | Records |
 |---|---:|
 | Legitimate | 3,829 |
 | Phishing | 3,829 |
-| Total | 7,658 |
+| **Total** | **7,658** |
 
 **Missing values:** 0
 
 ## 4. Important URL Features
 
-The dataset contains several URL-based features, including:
+The dataset includes features such as:
 
 - URL length
 - Hostname length
-- Number of dots
-- Number of hyphens
-- Number of `@` symbols
-- Number of question marks
-- HTTPS token
+- Number of dots and hyphens
+- `@` and `?` symbols
+- HTTPS information
 - IP address
 - Number of subdomains
 - URL shortening service
 - Phishing hints
 - Suspicious TLD
-- Number of hyperlinks
 - Domain age
 - Web traffic
 - Google index
@@ -63,7 +56,7 @@ The dataset contains several URL-based features, including:
 
 ## 5. Project Goal
 
-The machine learning model learns patterns from labelled URLs and classifies a new URL as either:
+The model learns patterns from labelled URLs and classifies new URLs as:
 
 **LEGITIMATE / SAFE**
 
@@ -73,47 +66,27 @@ or
 
 ## 6. System Workflow
 
-**Step 1 – Collect Dataset**
-
-Use labelled URLs containing both legitimate and phishing examples.
-
-**Step 2 – Feature Extraction**
-
-Use URL-based features such as URL length, number of dots, HTTPS information, IP address, suspicious keywords, subdomains, and other available features.
-
-**Step 3 – Data Preparation**
-
-Separate the URL features from the target column (`status`) and prepare the data for machine learning.
-
-**Step 4 – Model Training**
-
-Train machine learning classification models using the training dataset.
-
-**Step 5 – Model Evaluation**
-
-Evaluate the models using the testing dataset and compare their performance using accuracy and other evaluation metrics.
-
-**Step 6 – Confusion Matrix**
-
-Generate a confusion matrix to understand correct and incorrect phishing/legitimate predictions.
-
-**Step 7 – URL Prediction Demo**
-
-Allow the user/judge to enter a URL and display whether the URL is predicted as legitimate/safe or phishing.
+1. **Dataset Collection** – Collect labelled legitimate and phishing URLs.
+2. **Feature Extraction** – Use URL-based features for detection.
+3. **Data Preparation** – Separate features and the `status` target column.
+4. **Model Training** – Train classification models using the training data.
+5. **Model Evaluation** – Test and compare model performance.
+6. **Confusion Matrix** – Analyze correct and incorrect predictions.
+7. **URL Prediction** – Enter a URL and receive a phishing or legitimate prediction.
 
 ## 7. Technologies Used
 
-- **Programming Language:** Python
-- **Development Environment:** Google Colab
-- **Libraries:** pandas, scikit-learn, matplotlib, seaborn
-- **Machine Learning:** Classification models
-- **Dataset Source:** Kaggle
+- **Language:** Python
+- **Environment:** Google Colab
+- **Libraries:** Pandas, Scikit-learn, Matplotlib, Seaborn
+- **Machine Learning:** Classification Models
+- **Dataset:** Kaggle
 
 ## 8. Expected Output
 
-**Input:** A URL entered by the user.
+**Input:** URL entered by the user.
 
-**Output:** The system predicts whether the URL is:
+**Output:** Prediction as:
 
 **SAFE / LEGITIMATE**
 
@@ -123,21 +96,20 @@ or
 
 ## 9. Model Performance
 
-> Add the actual results after model testing.
+Model performance will be evaluated using accuracy and other evaluation metrics.
 
-**Decision Tree:** To be added after model testing.
-
-**Random Forest:** To be added after model testing.
-
-**Best Model:** To be decided based on testing results.
+- **Decision Tree:** To be added after testing
+- **Random Forest:** To be added after testing
+- **Best Model:** To be selected based on performance
 
 ## 10. Demo
 
-The final system will allow the user/judge to enter a URL and receive a prediction indicating whether the URL is legitimate/safe or phishing.
+The final application will allow users or judges to enter a URL and receive a prediction indicating whether it is legitimate or phishing.
 
 ## 11. Future Scope
 
 - Real-time URL checking
 - Browser extension integration
-- Improved phishing detection using additional features
-- Further improvement of model performance using larger datasets
+- Additional URL and domain features
+- Larger datasets for improved detection
+- Further improvement of model performance
